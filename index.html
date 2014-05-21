@@ -34,7 +34,6 @@
     </div>
   </div>
 </div>
-</div>
 
 <div class="hide" id="myAlert">
     <div class="alert">
@@ -46,34 +45,53 @@
 </div>
 
 <div class="container">
-<div class="row panel panel-primary">
-
-	<div class="panel-heading">Bootstrap Modal</div>
-    <div class="jumbotron">
+    <div class="row panel panel-primary">
+        <div class="panel-heading">Bootstrap Modal</div>
+        <div class="jumbotron">
+            
+            <h3>Multiple Modals</h3>
+            <p>Solving the issue of using a single modal placeholder div to drive many calls to load remote content.</p>
+            
+        </div>
         
-        <h3>Multiple Modals</h3>
-        <p>
-        Solving the issue of using a single modal placeholder div to drive many calls to load remote content.
-        </p>
+        <div class="row" id="tests">
+    		<div class="col-sm-3"></div>
+            <div class="col-xs-6">
+            
+                <a class="btn btn-default btn-lg" href="test1.html" data-toggle="modal" data-target="#myModal">
+                  Launch demo modal
+                </a>
+                
+                <a class="btn btn-default btn-lg" href="test2.html" data-toggle="modal" data-target="#myModal">
+                  Launch demo modal
+                </a>
         
-    </div>
-
-	<div class="col-sm-10">
-    	
-        <h2>Case Overview</h2>
-        <h3>Each modal need a target container</h3>
-        <p><span class="lead">When using the bootstrap modals, you may be interested in using the "remote" content feature by placing the href attribute along with data-target and data-toggle.</span></p>
-         
-         <p>This works fine but you need to have different modal divs on the page and each modal has is own id to correspond with the target. Now when using the remote feature, we find it doesnt make sense to place a bunch of empty container with corresponding ids just to be loading dynamic content into them at a later time.</p>
-         
-         <p> We looked around if a fix had been made, but two thing bothered us, first that the modal window would apear before the content had time to be loaded into it, and would show the old content from the previoulsy closed modal. Once that was fixed, we realisez we had lost the original fade in effect where the modal would slide down and apear, we could have but we did not want to recreate the effect manually. Want to know how we solved it?</p>
-         
-	</div>
+            </div>
+            <div class="col-sm-3"></div>
+		</div>
+        
+        
+        
+        
+        <div class="col-sm-10">
+            
+            <h2>Case Overview</h2>
+            
+            <h3>Each modal need a target container</h3>
+            
+            <p><span class="lead">When using the bootstrap modals, you may be interested in using the "remote" content feature by placing the href attribute along with data-target and data-toggle.</span></p>
+             
+             <p>This works fine but you need to have different modal divs on the page and each modal has is own id to correspond with the target. Now when using the remote feature, we find it doesnt make sense to place a bunch of empty container with corresponding ids just to be loading dynamic content into them at a later time.</p>
+             
+             <p> We looked around if a fix had been made, but two thing bothered us, first that the modal window would apear before the content had time to be loaded into it, and would show the old content from the previoulsy closed modal. Once that was fixed, we realisez we had lost the original fade in effect where the modal would slide down and apear, we could have but we did not want to recreate the effect manually. Want to know how we solved it?</p>
+             
+         </div>
     
+        <div class="col-sm-12">
     
-    
-    <div class="col-sm-12">
         <div class="row modal-to-div">
+        
+        
         <div class="col-xs-6 col-sm-4 col-md-3">
         	<div class="dashicons large center dashicons-feedback"></div>
             <i class="fa large fa-arrows-v"></i>
@@ -190,10 +208,14 @@
         
         <h1>The Solution</h1>
         <h3>How we fixed the issues by diving into Bootstrap behaviors</h3>
+        
         <br />
     
 	<div class="row div-remote-modal">
+    
+    
         <div class="col-xs-6 col-sm-4 col-md-3">
+        
 <pre class="code-icon">
 &lt;div id="<span class="id">myModal</span>">
    ...
@@ -222,16 +244,19 @@
         <div class="col-xs-6 col-sm-6 col-md-5">
             
 <h3>One Placeholder, Many Modals</h3>
-<p><span class="lead">With this code you can have multiple modals that load your remote content by placing only one placeholder in your page.</span> The modal will behave exactly the same as the original bootstrap modal and will enable you to give feedback to your user when the content is loading, this should definetly enchance the browsing experience by reducing the amount of other pages they need to load.</p>
+<p><span class="lead">With this code you can have multiple modals that load your remote content by placing only one placeholder in your page.</span> The modal will behave exactly the same as the original bootstrap modal and will enabe you to give feedback to your user when the content is loading, this should definetly enchance the browsing experience by reducing the amount of other pages they need to load.</p>
 
         </div>
         
        </div>
 
-<h3>The Code</h3>
-  <div class="row">
-  	
-	<div class="col-md-8 col-lg-7">
+
+
+		<h3>The Code</h3>
+
+		<div class="row">
+
+			<div class="col-md-8 col-lg-7">
 
 <pre id="solution">
 $(function() {
@@ -277,8 +302,11 @@ $(function() {
     <span class="l2">});</span>
 });
 </pre>
-	</div>
-    <div class="col-md-4">
+
+			</div>
+            
+            
+    		<div class="col-md-4">
     
     
 <div class="panel-group" id="accordion">
@@ -406,28 +434,15 @@ $(function() {
     </div>
   </div>
 </div>
-        
-       
- 
-    </div>
-    </div>
-     
-     <h2>Want to try it out</h2>
-        
-	</div>
-    
-    <div class="row">
-    
-    <div class="col-xs-6">
-    
-<a class="btn btn-default btn-lg" href="test1.html" data-toggle="modal" data-target="#myModal">
-  Launch demo modal
-</a>
 
-<a class="btn btn-default btn-lg" href="test2.html" data-toggle="modal" data-target="#myModal">
-  Launch demo modal
-</a>
-	</div>
+    		</div>
+            
+            
+    	</div>
+     
+     	<h2>Want to try it out!</h2>
+		
+    	
 	</div>
 
 </div>
