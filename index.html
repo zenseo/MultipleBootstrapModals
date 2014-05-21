@@ -490,7 +490,7 @@ $(function() {
 				},
 				complete: function( data, status ){
 					
-					//setTimeout(function(){
+					setTimeout(function(){
 					
 						$('.modal-backdrop').removeClass('loading');
 						$modal.removeClass('loading');
@@ -511,7 +511,7 @@ $(function() {
 						
 						$modal.addClass('in');
 					
-					//}, 2000); // wait 5 seconds before showing the message
+					}, 2000); // wait 5 seconds before showing the message
 				}
 			});
 			e.preventDefault();
