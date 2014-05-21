@@ -1,0 +1,14 @@
+{
+  "name": "master",
+  "_cacheHeaders": {
+    "ETag": "\"fdb0c091976fef254eb751999acc63af46e0b2b5\"",
+    "Content-Length": "226316",
+    "Content-Type": "application/zip",
+    "Content-Disposition": "attachment; filename=dashicons-master.zip"
+  },
+  "_release": "e-tag:fdb0c0919",
+  "_source": "https://github.com/melchoyce/dashicons/archive/master.zip",
+  "_target": "*",
+  "_originalSource": "https://github.com/melchoyce/dashicons/archive/master.zip",
+  "_direct": true
+}

@@ -1,71 +1,528 @@
-<!doctype html>
-<html>
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="chrome=1">
-    <title>Multiple Bootstrap Modals by kingdomcreation</title>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>Bootstrap Modal</title>
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+<link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap-theme.min.css">
+<link rel="stylesheet" href="http://netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="dashicons/css/dashicons.css">
+<link rel="stylesheet" href="stylesheets/style.css">
+<style>
+.loading .modal-dialog{
+	visibility:hidden;
+}
+.modal-backdrop.loading{
+	background-image:url(images/loading.gif);
+	background-repeat:no-repeat;
+	background-position: center center;
+}
+.modal-content .alert{
+	margin-bottom:0px;	
+}
+</style>
+</head>
 
-    <link rel="stylesheet" href="stylesheets/styles.css">
-    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
-    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
-    <!--[if lt IE 9]>
-    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-    <![endif]-->
-  </head>
-  <body>
-    <div class="wrapper">
-      <header>
-        <h1>Multiple Bootstrap Modals</h1>
-        <p>Solving the issue of using a single modal placeholder div to drive many calls to load remote content.</p>
+<body>
 
-        <p class="view"><a href="https://github.com/kingdomcreation/MultipleModals">View the Project on GitHub <small>kingdomcreation/MultipleModals</small></a></p>
 
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+        
+    </div>
+  </div>
+</div>
+</div>
+
+<div class="hide" id="myAlert">
+    <div class="alert">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4>Error</h4>
+        <p class="msg"></p>
+        <br />       
+    </div>
+</div>
+
+<div class="container">
+<div class="row panel panel-primary">
+
+	<div class="panel-heading">Bootstrap Modal</div>
+    <div class="jumbotron">
+        
+        <h3>Multiple Modals</h3>
+        <p>
+        Solving the issue of using a single modal placeholder div to drive many calls to load remote content.
+        </p>
+        
+    </div>
+
+	<div class="col-sm-10">
+    	
+        <h2>Case Overview</h2>
+        <h3>Each modal need a target container</h3>
+        <p><span class="lead">When using the bootstrap modals, you may be interested in using the "remote" content feature by placing the href attribute along with data-target and data-toggle.</span></p>
+         
+         <p>This works fine but you need to have different modal divs on the page and each modal has is own id to correspond with the target. Now when using the remote feature, we find it doesnt make sense to place a bunch of empty container with corresponding ids just to be loading dynamic content into them at a later time.</p>
+         
+         <p> We looked around if a fix had been made, but two thing bothered us, first that the modal window would apear before the content had time to be loaded into it, and would show the old content from the previoulsy closed modal. Once that was fixed, we realisez we had lost the original fade in effect where the modal would slide down and apear, we could have but we did not want to recreate the effect manually. Want to know how we solved it?</p>
+         
+	</div>
+    
+    
+    
+    <div class="col-sm-12">
+        <div class="row modal-to-div">
+        <div class="col-xs-6 col-sm-4 col-md-3">
+        	<div class="dashicons large center dashicons-feedback"></div>
+            <i class="fa large fa-arrows-v"></i>
+<pre class="code-icon">
+&lt;div id="<span class="id">myModal1</span>">
+   ...
+&lt;/div>
+</pre>
+        </div>
+        
+        <div class="col-xs-6 col-sm-4 col-md-3">
+        	<div class="dashicons large  center dashicons-feedback"></div>
+            <i class="fa large fa-arrows-v"></i>
+            
+<pre class="code-icon">
+&lt;div id="<span class="id">myModal2</span>">
+   ...
+&lt;/div>
+</pre>
+        </div>
+        
+        <div class="hidden-xs col-sm-4 col-md-3">
+        	<div class="dashicons large center dashicons-feedback"></div>
+            <i class="fa large fa-arrows-v"></i>
+<pre class="code-icon">
+&lt;div id="<span class="id">myModal3</span>">
+   ...
+&lt;/div>
+</pre>
+        </div>
+        
+           
+        </div>
+        
+        
+        <br />
+        
+        <h2>Google it, anyone?</h2>
+        
+        <h3>What about an existing solution</h3>
+     	
+        <p class="lead">There are many possible uses for the modals, and probably many variations of the technique here are some ways someone might be using it at the moment.</p>
+        
+        <section class="jumbotron large">
+        	<h2>1. The Bootstrap Example</h2>
+        	<div><a href="http://getbootstrap.com/javascript/#modals">http://getbootstrap.com/javascript/#modals</a></div>
+        
+        	<br />
+        
+            <dl class="dl-horizontal">
+              <dt>Static HTML</dt>
+              <dd><p>For each modal, the content for the modal is placed inside the page</p></dd>
+              
+              <dt>Corresponding ID</dt>
+              <dd><p>Each modal ID corresponds to each data-target selector used to open the right modal window</p></dd>
+              
+              <dt>Remote Placeholder</dt>
+              <dd><p>If content is loaded remotly, a placeholder div must be present on the page to load the remote content into it</p>
+                <br  />
+                <div class="alert alert-warning">
+                	<strong>Known Issues</strong>
+                    <ul>
+                    	<li>If you try to use just one placeholder for remote content, only the first one you click on will show.</li>	
+                    </ul>
+                </div>
+              </dd>
+              
+            </dl>
+        	
+            
+            
+     	</section>
+        
+        <section class="jumbotron large">
+        	
+            <h2>2. The Stackoverflow Fix</h2>
+        	<div><a href="http://stackoverflow.com/questions/14045515/how-can-i-reuse-one-bootstrap-modal-div">
+            		http://stackoverflow.com/questions/14045515/how-can-i-reuse-one-bootstrap-modal-div</a></div>
+        
+        	<br />
+        
+            <dl class="dl-horizontal">
+              
+              <dt>One Placeholder</dt>
+              <dd><p>Only one modal placeholder will be added to load all remote content</p></dd>
+              
+              <dt>jQuery</dt>
+              <dd><p>Using a selector to attach a click event to all buttons destined to open a modal </p></dd>
+              
+              <dt>AJAX</dt>
+              <dd><p>We manually load in the content via ajax and add it ourselves to the inside of the modal</p></dd>
+              
+              <dt></dt>
+              <dd>
+              	<br  />
+                <div class="alert alert-warning">
+                	<strong>Known Issues</strong>
+                    <ul>
+                    	<li>First time the modal show, the modal is empty, only shadows from .modal-dialog show then</li>	
+                        <li>The content gets added after the slide in effect happens</li>
+                        <li>When you click another button, the modal loads with the previous content inside, then</li>
+                        <li>After the content as been loaded via ajax it get added</li>	
+                    </ul>
+                </div>
+                
+
+
+              </dd>
+            </dl>
+        
+
+     	</section>
+         
+        
+        <h1>The Solution</h1>
+        <h3>How we fixed the issues by diving into Bootstrap behaviors</h3>
+        <br />
+    
+	<div class="row div-remote-modal">
+        <div class="col-xs-6 col-sm-4 col-md-3">
+<pre class="code-icon">
+&lt;div id="<span class="id">myModal</span>">
+   ...
+&lt;/div>
+</pre>
+        </div>
+        
+        <div class="col-xs-1">
+            <i class="fa large fa-long-arrow-right deg-45"></i>
+            <i class="fa large fa-long-arrow-right"></i>
+            <i class="fa large fa-long-arrow-right deg45"></i>
+        </div>
+        
+        <div class="col-xs-1 col-sm-1 col-md-1 modals">
+        	<div class="dashicons large dashicons-feedback"></div>
+            <div class="dashicons large dashicons-feedback"></div>
+            <div class="dashicons large dashicons-feedback"></div>
+		</div>
+        
+        <div class="col-xs-1 col-sm-1 col-md-1 modals">
+        	<br />
+            <br />
+        	<div class="dashicons large">=</div>
+		</div>
+
+        <div class="col-xs-6 col-sm-6 col-md-5">
+            
+<h3>One Placeholder, Many Modals</h3>
+<p><span class="lead">With this code you can have multiple modals that load your remote content by placing only one placeholder in your page.</span> The modal will behave exactly the same as the original bootstrap modal and will enable you to give feedback to your user when the content is loading, this should definetly enchance the browsing experience by reducing the amount of other pages they need to load.</p>
+
+        </div>
+        
+       </div>
+
+<h3>The Code</h3>
+  <div class="row">
+  	
+	<div class="col-md-8 col-lg-7">
+
+<pre id="solution">
+$(function() {
+
+    <span class="l2">$('[data-toggle="modal"]').on('click', function(e){</span>
+    
+        <span class="l3">var href = $(this).attr('href');
+        
+        if (typeof href !== 'undefined' && href !== false){</span>
+
+            <span class="l4">var $modal = $($(this).data('target'));</span>
+                <span class="l5">$modal.addClass('loading');</span>
+                <span class="l6">$modal.modal();</span>
+                
+            <span class="l7">$.ajax({
+                url: href,
+                dataType:"html",
+                type:"GET",
+                data: {},</span>
+                <span class="l8">beforeSend: function(){	
+                    $modal.bind('shown.bs.modal.loading',function(){</span>
+                        <span class="l9">$(this).removeClass('in');</span>
+                        <span class="l10">$('.modal-backdrop').addClass('loading');</span>
+                    <span class="l8">});
+                },</span>
+                <span class="l11">complete: function( data, status ){
+                    $('.modal-backdrop').removeClass('loading');
+                    $modal.removeClass('loading');</span>
+                    <span class="l12">$modal.unbind('shown.bs.modal.loading');</span>
+                    <span class="l13">if( status == 'success' ){
+                        
+                        $('.modal-content', $modal).html(data.responseText);
+                        
+                    }</span><span class="l14">else{
+                        $('.modal-content', $modal).html(status);
+                    }</span>
+                    <span class="l15">$modal.addClass('in');</span>
+                <span class="l11">}</span>
+            <span class="l7">});</span>
+            <span class="l16">e.preventDefault();</span>
+            <span class="l17">return false;</span>
+        <span class="l3">}</span>
+    <span class="l2">});</span>
+});
+</pre>
+	</div>
+    <div class="col-md-4">
+    
+    
+<div class="panel-group" id="accordion">
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h4 class="panel-title">
+        <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
+         Summary
+        </a>
+      </h4>
+    </div>
+    <div id="collapseOne" class="panel-collapse collapse in">
+      <div class="panel-body">
 
         <ul>
-          <li><a href="https://github.com/kingdomcreation/MultipleModals/zipball/master">Download <strong>ZIP File</strong></a></li>
-          <li><a href="https://github.com/kingdomcreation/MultipleModals/tarball/master">Download <strong>TAR Ball</strong></a></li>
-          <li><a href="https://github.com/kingdomcreation/MultipleModals">View On <strong>GitHub</strong></a></li>
+            <li>Attach the click event</li>
+            <li>Add loading class</li>
+            <li>Open modal</li>
+            <li>Load HTML data from href</li>
+            <li>Add loading to backdrop</li>
+            <li>Remove loading class</li>
+            <li>Add data to modal content</li>
+            <li>Animate back in</li>
         </ul>
-      </header>
-      <section>
-        <h3>
-<a name="welcome-to-github-pages" class="anchor" href="#welcome-to-github-pages"><span class="octicon octicon-link"></span></a>Welcome to GitHub Pages.</h3>
-
-<p>This automatic page generator is the easiest way to create beautiful pages for all of your projects. Author your page content here using GitHub Flavored Markdown, select a template crafted by a designer, and publish. After your page is generated, you can check out the new branch:</p>
-
-<pre><code>$ cd your_repo_root/repo_name
-$ git fetch origin
-$ git checkout gh-pages
-</code></pre>
-
-<p>If you're using the GitHub for Mac, simply sync your repository and you'll see the new branch.</p>
-
-<h3>
-<a name="designer-templates" class="anchor" href="#designer-templates"><span class="octicon octicon-link"></span></a>Designer Templates</h3>
-
-<p>We've crafted some handsome templates for you to use. Go ahead and continue to layouts to browse through them. You can easily go back to edit your page before publishing. After publishing your page, you can revisit the page generator and switch to another theme. Your Page content will be preserved if it remained markdown format.</p>
-
-<h3>
-<a name="rather-drive-stick" class="anchor" href="#rather-drive-stick"><span class="octicon octicon-link"></span></a>Rather Drive Stick?</h3>
-
-<p>If you prefer to not use the automatic generator, push a branch named <code>gh-pages</code> to your repository to create a page manually. In addition to supporting regular HTML content, GitHub Pages support Jekyll, a simple, blog aware static site generator written by our own Tom Preston-Werner. Jekyll makes it easy to create site-wide headers and footers without having to copy them across every page. It also offers intelligent blog support and other advanced templating features.</p>
-
-<h3>
-<a name="authors-and-contributors" class="anchor" href="#authors-and-contributors"><span class="octicon octicon-link"></span></a>Authors and Contributors</h3>
-
-<p>You can <a href="https://github.com/blog/821" class="user-mention">@mention</a> a GitHub username to generate a link to their profile. The resulting <code>&lt;a&gt;</code> element will link to the contributor's GitHub Profile. For example: In 2007, Chris Wanstrath (<a href="https://github.com/defunkt" class="user-mention">@defunkt</a>), PJ Hyett (<a href="https://github.com/pjhyett" class="user-mention">@pjhyett</a>), and Tom Preston-Werner (<a href="https://github.com/mojombo" class="user-mention">@mojombo</a>) founded GitHub.</p>
-
-<h3>
-<a name="support-or-contact" class="anchor" href="#support-or-contact"><span class="octicon octicon-link"></span></a>Support or Contact</h3>
-
-<p>Having trouble with Pages? Check out the documentation at <a href="http://help.github.com/pages">http://help.github.com/pages</a> or contact <a href="mailto:support@github.com">support@github.com</a> and we’ll help you sort it out.</p>
-      </section>
-      <footer>
-        <p>This project is maintained by <a href="https://github.com/kingdomcreation">kingdomcreation</a></p>
-        <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></small></p>
-      </footer>
+      </div>
     </div>
-    <script src="javascripts/scale.fix.js"></script>
+  </div>
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h4 class="panel-title">
+        <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">
+          Details
+        </a>
+      </h4>
+    </div>
+    <div id="collapseTwo" class="panel-collapse collapse">
+      <div class="panel-body">
+        
+        
+        
+        <p onmouseover="highlight('.l2')" onmouseout="highlight('.l2',true)">First, we go through all elements that follow the bootstrap conventions and have the <code>data-toggle="modal"</code> attribute. <br />Each will now have it's click event overriden by our function.</p>
     
-  </body>
+    
+    
+        <p onmouseover="highlight('.l3')" onmouseout="highlight('.l3',true)">We check that the href attribute has been defined in order to proceed because we dont want to force this behavior on all modals, so if you whish to use modals with static content you still can.</p>
+        
+        
+        
+        
+        <p onmouseover="highlight('.l4')" onmouseout="highlight('.l4',true)">We then locate the placeholder by using the <code>data-target</code> attribute witch can be different for each modal or all modals can share the same placeholder if they have the same target.</p>
+        
+        
+  
+        
+        <p onmouseover="highlight('.l5')" onmouseout="highlight('.l5',true)">Once that's done we add the loading class to the modal container, so another css selector can be activated to hide the modal-dialog that's inside.</p>
+
+
+<pre class="alert-info">
+.loading .modal-dialog{
+    visibility:hidden;
+}
+</pre>
+
+
+        <p>This serves two purposes first the shadows wont show when the modal is empty on first load and also we will be able to move the modal out again so we can slide it back in when the remote content is done loading.</p>
+      </div>
+    </div>
+  </div>
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h4 class="panel-title">
+        <a data-toggle="collapse" data-parent="#accordion" href="#collapseThree">
+          jQuery AJAX
+        </a>
+      </h4>
+    </div>
+    <div id="collapseThree" class="panel-collapse collapse">
+      <div class="panel-body">
+      <p onmouseover="highlight('.l6')" onmouseout="highlight('.l6',true)">Remember, this is all happening on the click of the button, we demand the modal to show up by using bootstrap's code <code>$('#myModal').modal();</code></p>
+      
+      <p>Remember that the css make the modal-dialog hidden, so all we see is the modal-backdrop</p>
+      
+      <p onmouseover="highlight('.l7')" onmouseout="highlight('.l7',true)">In order to load our remote content, we make use of jQuery's AJAX methods and by having checked the href, we can now use it to load the content of the file into the modal container.</p>
+      
+      <p onmouseover="highlight('.l8')" onmouseout="highlight('.l8',true)">Before we send off our ajax request we bind the <code>shown.bs.modal</code> event <p>
+      
+      <p onmouseover="highlight('.l9')" onmouseout="highlight('.l9',true)">When the modal is shown we will remove the "in" class that bootstrap added to slide the modal into the page. Removing it, actually slides it back up.</p>
+      
+      <p onmouseover="highlight('.l10')" onmouseout="highlight('.l10',true)">We also add a "loading" class to the modal-backdrop that we can then use in CSS to add a loading gif animation while the content is loading.</p>
+
+<p><strong>Consider adding this to your stylesheet</strong></p>
+<pre class="alert-info">
+.modal-backdrop.loading{
+   ...
+}
+</pre>      
+      
+      </div>
+    </div>
+    
+  </div>
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h4 class="panel-title">
+        <a data-toggle="collapse" data-parent="#accordion" href="#collapssFour">
+          Request Complete
+        </a>
+      </h4>
+    </div>
+    <div id="collapssFour" class="panel-collapse collapse">
+      <div class="panel-body">
+        <p onmouseover="highlight('.l11')" onmouseout="highlight('.l11',true)">When our request is complete, we can remove the loading classes both on the modal and on the modal-backdrop.</p>
+        
+       <p onmouseover="highlight('.l12')" onmouseout="highlight('.l12',true)">We alse stop listening to the <code>shown.bs.modal</code> event to in case other are expecting a call back. The loading namespace was added the make it simpler to unbind from the event propagation.</p>
+       
+      <p onmouseover="highlight('.l13')" onmouseout="highlight('.l13',true)">If we successfully retreived data, we can add the content of the loaded page into the modal-content just like bootstrap would do.</p>
+      
+      <p onmouseover="highlight('.l15')" onmouseout="highlight('.l15',true)">To slide the modal back in, we add the "in" class back to the modal.</p>
+      
+      <p onmouseover="highlight('.l16')" onmouseout="highlight('.l16',true)">It was nessary to prevent the default behavior of links because otherwise the href would send us to another page.</p>
+      
+      <p onmouseover="highlight('.l17')" onmouseout="highlight('.l17',true)">We then prevent bootstrap from showing the modal before the content finished loading by returning <code>false</code>, because the loading process is asyncronious to the click function call.</p>
+      
+      </div>
+    </div>
+  </div>
+</div>
+        
+       
+ 
+    </div>
+    </div>
+     
+     <h2>Want to try it out</h2>
+        
+	</div>
+    
+    <div class="row">
+    
+    <div class="col-xs-6">
+    
+<a class="btn btn-default btn-lg" href="test1.html" data-toggle="modal" data-target="#myModal">
+  Launch demo modal
+</a>
+
+<a class="btn btn-default btn-lg" href="test2.html" data-toggle="modal" data-target="#myModal">
+  Launch demo modal
+</a>
+	</div>
+	</div>
+
+</div>
+
+</div>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js?ver=1.10.2"></script>
+<script src="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+<script>
+$(function() {
+ 
+	function ajaxError(error, status) {
+		var msg;
+		var statusErrorMap = {
+			'400' : "Server understood the request but request content was invalid.",
+			'401' : "Unauthorised access.",
+			'403' : "Forbidden resouce can't be accessed",
+			'404' : "Page not found",
+			'500' : "Internal Server Error.",
+			'503' : "Service Unavailable"
+		};
+		if (error) {
+			msg=statusErrorMap[error];
+			if(!msg){
+			  msg="Unknow Error";
+			}
+		}else if(exception=='parsererror'){
+			msg="Parsing JSON Request failed.";
+		}else if(exception=='timeout'){
+			msg="Request Time out.";
+		}else if(exception=='abort'){
+			msg="Request was aborted by the server";
+		}else {
+			msg="Unknow Error";
+		}
+		return msg;
+	}
+		 
+	$('[data-toggle="modal"]').on('click', function(e){
+		
+		var href = $(this).attr('href');
+		
+		if (typeof href !== 'undefined' && href !== false){
+		
+			var $modal = $($(this).data('target'));
+				$modal.addClass('loading');
+				$modal.modal();
+		
+		
+		
+			$.ajax({
+				url: href,
+				dataType:"html",
+				type:"GET",
+				data: {},
+				beforeSend: function(){	
+					$modal.bind('shown.bs.modal.loading',function(){
+						$(this).removeClass('in');
+						$('.modal-backdrop').addClass('loading');
+					});
+				},
+				complete: function( data, status ){
+					
+					//setTimeout(function(){
+					
+						$('.modal-backdrop').removeClass('loading');
+						$modal.removeClass('loading');
+						$modal.unbind('shown.bs.modal.loading');
+						
+						if( status == 'success' ){
+							
+							$('.modal-content', $modal).html(data.responseText);
+			
+						}else{
+							
+							var $alert = $('#myAlert');
+							$('.alert', $alert).addClass('alert-danger');
+							$('.modal-content', $modal).html($alert.html() );
+							$('.modal-content h4',$modal).html(status); 
+							$('.modal-content p', $modal).html( ajaxError( data.status, status ) );
+						}
+						
+						$modal.addClass('in');
+					
+					//}, 2000); // wait 5 seconds before showing the message
+				}
+			});
+			e.preventDefault();
+			return false;
+		}
+        
+    });
+	
+    
+});
+</script>
+<script src="javascript/main.js"></script>
+</body>
 </html>
